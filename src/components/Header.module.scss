@@ -13,13 +13,15 @@
 .headerTitle {
     font-weight: 800;
     font-size: 0.87rem;
-    color: var(--secondary)
+    color: var(--secondary);
+    text-decoration: none;
 }
 
 .themeButton {
     background-color: transparent;
     border: 0;
     display: flex;
+    cursor: pointer;
     align-items: center;
     gap: 5px;
     font-weight: 600;
