@@ -10,6 +10,10 @@ body {
   box-sizing: border-box;
 }
 
+button {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
 // light mode
 :root[data-theme='light'] {
   --primary: hsl(0, 0%, 100%);
