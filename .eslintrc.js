@@ -4,31 +4,32 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:jsx-a11y/recommended',
   ],
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: "script",
+        sourceType: 'script',
       },
     },
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["@typescript-eslint", "react", "jsx-a11y"],
+  plugins: ['@typescript-eslint', 'react', 'jsx-a11y'],
   rules: {
-    indent: ["error", 2],
-    "react/react-in-jsx-scope": "off",
-    "react/button-has-type": "error",
+    indent: ['error', 2],
+    'react/react-in-jsx-scope': 'off',
+    'react/button-has-type': 'error',
+    quotes: ['error', 'single'],
   },
 };
