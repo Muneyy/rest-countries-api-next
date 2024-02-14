@@ -14,7 +14,11 @@ export default function Header() {
 
   return (
     <section className={styles.headerContainer}>
-      <Link className={styles.headerTitle} href={'/'}>
+      <Link
+        className={styles.headerTitle}
+        href={'/'}
+        aria-label="Link to homepage"
+      >
         Where in the world?
       </Link>
       <button
