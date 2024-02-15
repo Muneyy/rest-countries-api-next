@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styles from './page.module.scss';
 import Link from 'next/link';
 import BackButton from '@/components/BackButton';
+import { notFound } from 'next/navigation';
 
 async function getData(countryCode: string) {
   try {
@@ -9,6 +10,9 @@ async function getData(countryCode: string) {
     const res = await fetch(
       `https://restcountries.com/v3.1/alpha/${countryCode}?fields=name,flags,population,region,subregion,capital,languages,currencies,tld,altSpellings,borders`
     );
+
+    if (!res.ok) return undefined;
+
     const data = await res.json();
     return data;
   } catch (err) {
@@ -24,6 +28,11 @@ export default async function CountryDetails({
   };
 }) {
   const data = await getData(params.countryCode);
+
+  if (!data) {
+    return notFound();
+  }
+
   const fetchedCountry = await data;
 
   if (fetchedCountry && fetchedCountry.name) {
