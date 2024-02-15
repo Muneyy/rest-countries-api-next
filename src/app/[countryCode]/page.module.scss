@@ -1,5 +1,5 @@
 .container {
-  padding-top: 70px;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,7 +22,26 @@
   img {
     align-self: center;
   }
+  button {
+    background-color: var(--primary-very-light);
+    width: 95px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Add box shadow here
+    color: var(--secondary);
+    cursor: pointer;
+    &:hover {
+      filter: invert(0.2);
+    }
+  }
+}
 
+.flagImage {
+  margin-top: 50px
 }
 
 .bordersContainer {
@@ -35,20 +54,4 @@
 .borderLink {
   text-decoration: none;
   color: var(--secondary);
-
-  button {
-    background-color: var(--primary-very-light);
-    width: 95px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Add box shadow here
-    color: var(--secondary);
-    cursor: pointer;
-    &:hover {
-      filter: invert(0.2);
-    }
-  }
 }

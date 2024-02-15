@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from './page.module.scss';
 import Link from 'next/link';
+import BackButton from '@/components/BackButton';
 
 async function getData(countryCode: string) {
   try {
@@ -8,11 +9,10 @@ async function getData(countryCode: string) {
     const res = await fetch(
       `https://restcountries.com/v3.1/alpha/${countryCode}?fields=name,flags,population,region,subregion,capital,languages,currencies,tld,altSpellings,borders`
     );
-    console.log(countryCode);
     const data = await res.json();
     return data;
   } catch (err) {
-    console.error(err);
+    return err;
   }
 }
 
@@ -25,12 +25,18 @@ export default async function CountryDetails({
 }) {
   const data = await getData(params.countryCode);
   const fetchedCountry = await data;
-  console.log(fetchedCountry);
 
   if (fetchedCountry && fetchedCountry.name) {
     return (
       <section className={styles.container}>
-        <Image src={fetchedCountry.flags?.svg} alt={fetchedCountry.flags.alt} width={320} height={200} />
+        <BackButton />
+        <Image
+          src={fetchedCountry.flags?.svg}
+          alt={fetchedCountry.flags.alt}
+          width={320}
+          height={200}
+          className={styles.flagImage}
+        />
         <h1>{fetchedCountry.name.common}</h1>
         <p>
           <b>Native Name:</b> {fetchedCountry.altSpellings[1]}
