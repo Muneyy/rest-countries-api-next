@@ -41,43 +41,55 @@ export default async function CountryDetails({
 
   return (
     <section className={styles.container}>
-      <BackButton />
-      <Image src={flags.svg} alt={flags.alt} width={320} height={200} className={styles.flagImage} />
-      <h1>{name.common}</h1>
-      <p>
-        <b>Native Name:</b> {altSpellings[1]}
-      </p>
-      <p>
-        <b>Population:</b> {commafy(population)}
-      </p>
-      <p>
-        <b>Region:</b> {region}
-      </p>
-      <p>
-        <b>Sub Region:</b> {subregion}
-      </p>
-      <p>
-        <b>Capital:</b> {capital[0]}
-      </p>
-      <br />
-      <p>
-        <b>Top Level Domain:</b> {tld[0]}
-      </p>
-      {renderKeyValuePairs(currencies, 'Currencies')}
-      {renderKeyValuePairs(languages, 'Languages')}
-      <div>
-        <p>
-          <b>Border Countries: </b>
-        </p>
-        <br />
-        <div className={styles.bordersContainer}>
-          {borders.sort().map((border: string) => {
-            return (
-              <Link href={`/${border}`} key={border} aria-label={`Link to ${border}`} className={styles.borderLink}>
-                <button type="button">{border}</button>
-              </Link>
-            );
-          })}
+      <div className={styles.leftSide}>
+        <BackButton />
+        <div className={styles.flagImage}>
+          <Image src={flags.svg} alt={flags.alt} layout="fill" />
+        </div>
+      </div>
+      <div className={styles.rightSide}>
+        <h1>{name.common}</h1>
+        <div className={styles.detailsDivider}>
+          <div className={styles.detailsLeftSide}>
+            <p>
+              <b>Native Name:</b> {altSpellings[1]}
+            </p>
+            <p>
+              <b>Population:</b> {commafy(population)}
+            </p>
+            <p>
+              <b>Region:</b> {region}
+            </p>
+            <p>
+              <b>Sub Region:</b> {subregion}
+            </p>
+            <p>
+              <b>Capital:</b> {capital[0]}
+            </p>
+          </div>
+          <br />
+          <div className={styles.detailsRightSide}>
+            <p>
+              <b>Top Level Domain:</b> {tld[0]}
+            </p>
+            {renderKeyValuePairs(currencies, 'Currencies')}
+            {renderKeyValuePairs(languages, 'Languages')}
+          </div>
+        </div>
+        <div className={styles.bordersDivider}>
+          <p>
+            <b>Border Countries: </b>
+          </p>
+          <br />
+          <div className={styles.bordersContainer}>
+            {borders.sort().map((border: string) => {
+              return (
+                <Link href={`/${border}`} key={border} aria-label={`Link to ${border}`} className={styles.borderLink}>
+                  <button type="button">{border}</button>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
