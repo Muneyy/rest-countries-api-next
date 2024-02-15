@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import styles from './page.module.scss';
 
 async function getData({
   params,
@@ -9,7 +10,7 @@ async function getData({
 }) {
   try {
     const res = await fetch(
-      `https://restcountries.com/v3.1/name/${params.countryName}`,
+      `https://restcountries.com/v3.1/name/${params.countryName}?fields=name,flags,population,region,subregion,capital,languages,currencies,tld,altSpellings,`
     );
     return res.json();
   } catch (err) {
@@ -29,28 +30,45 @@ export default async function CountryDetails({
   console.log(fetchedCountry);
 
   return (
-    <section>
-      <Image
-        src={fetchedCountry.flags.svg}
-        alt={fetchedCountry.flags.alt}
-        width={300}
-        height={200}
-      />
+    <section className={styles.container}>
+      <Image src={fetchedCountry.flags.svg} alt={fetchedCountry.flags.alt} width={300} height={200} />
       <h1>{fetchedCountry.name.common}</h1>
-      <p>Native Name: {fetchedCountry.altSpellings[1]}</p>
-      <p>Population: {fetchedCountry.population}</p>
-      <p>Region: {fetchedCountry.region}</p>
-      <p>Sub Region: {fetchedCountry.subregion}</p>
-      <p>Capital: {fetchedCountry.capital[0]}</p>
-
-      <br />
-      <br />
-
-      <p>Top Level Domain: {fetchedCountry.tld[0]}</p>
       <p>
-        Languages:{' '}
-        {Object.entries(fetchedCountry.languages).map(([key, value]) => (
-          <span key={key}>{value as string}, </span>
+        <b>Native Name:</b> {fetchedCountry.altSpellings[1]}
+      </p>
+      <p>
+        <b>Population:</b> {fetchedCountry.population}
+      </p>
+      <p>
+        <b>Region:</b> {fetchedCountry.region}
+      </p>
+      <p>
+        <b>Sub Region:</b> {fetchedCountry.subregion}
+      </p>
+      <p>
+        <b>Capital:</b> {fetchedCountry.capital[0]}
+      </p>
+
+      <br />
+      <p>
+        <b>Top Level Domain:</b> {fetchedCountry.tld[0]}
+      </p>
+      <p>
+        <b>Currencies:</b>{' '}
+        {Object.entries(fetchedCountry.currencies).map(([key, value], index, array) => (
+          <span key={key}>
+            {(value as { name: string }).name as string}
+            {index === array.length - 1 ? null : ', '}
+          </span>
+        ))}
+      </p>
+      <p>
+        <b>Languages:</b>{' '}
+        {Object.entries(fetchedCountry.languages).map(([key, value], index, array) => (
+          <span key={key}>
+            {value as string}
+            {index === array.length - 1 ? null : ', '}
+          </span>
         ))}
       </p>
     </section>
