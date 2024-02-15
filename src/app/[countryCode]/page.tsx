@@ -30,7 +30,7 @@ export default async function CountryDetails({
   if (fetchedCountry && fetchedCountry.name) {
     return (
       <section className={styles.container}>
-        <Image src={fetchedCountry.flags?.svg} alt={fetchedCountry.flags.alt} width={300} height={200} />
+        <Image src={fetchedCountry.flags?.svg} alt={fetchedCountry.flags.alt} width={320} height={200} />
         <h1>{fetchedCountry.name.common}</h1>
         <p>
           <b>Native Name:</b> {fetchedCountry.altSpellings[1]}
@@ -70,7 +70,9 @@ export default async function CountryDetails({
           ))}
         </p>
         <div>
-          <b>Border Countries: </b>
+          <p>
+            <b>Border Countries: </b>
+          </p>
           <br />
           <div className={styles.bordersContainer}>
             {fetchedCountry.borders.map((border: string) => {

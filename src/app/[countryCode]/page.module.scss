@@ -1,25 +1,54 @@
 .container {
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  padding-left: 28px;
+  padding-right: 28px;
+  background-color: transparent;
+
+  
+  h1 {
+    font-size: 1.3rem;
+  }
   b {
     font-weight: 600;
   }
-
-  .bordersContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+  p {
+    margin: 0;
+    font-size: 0.88rem;
+  }
+  img {
+    align-self: center;
   }
 
-  .borderLink {
-    text-decoration: none;
-    color: var(--secondary);
+}
 
-    button {
-        background-color: var(--primary-light);
-        border: 1px solid black;
-        color: var(--secondary);
-        cursor: pointer;
+.bordersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.borderLink {
+  text-decoration: none;
+  color: var(--secondary);
+
+  button {
+    background-color: var(--primary-very-light);
+    width: 95px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Add box shadow here
+    color: var(--secondary);
+    cursor: pointer;
+    &:hover {
+      filter: invert(0.2);
     }
   }
-
 }
