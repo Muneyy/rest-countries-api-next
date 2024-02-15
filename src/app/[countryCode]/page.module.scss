@@ -3,6 +3,13 @@
     font-weight: 600;
   }
 
+  .bordersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
   .borderLink {
     text-decoration: none;
     color: var(--secondary);
