@@ -14,19 +14,10 @@ export default function Header() {
 
   return (
     <section className={styles.headerContainer}>
-      <Link
-        className={styles.headerTitle}
-        href={'/'}
-        aria-label="Link to homepage"
-      >
+      <Link className={styles.headerTitle} href={'/'} aria-label="Link to homepage">
         Where in the world?
       </Link>
-      <button
-        type="button"
-        aria-label="Toggle dark mode"
-        className={styles.themeButton}
-        onClick={toggleThemeClick}
-      >
+      <button type="button" aria-label="Toggle dark mode" className={styles.themeButton} onClick={toggleThemeClick}>
         <FontAwesomeIcon icon={faMoon} />
         <p>Dark Mode</p>
       </button>
