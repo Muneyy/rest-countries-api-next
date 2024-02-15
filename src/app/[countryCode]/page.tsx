@@ -2,19 +2,15 @@ import Image from 'next/image';
 import styles from './page.module.scss';
 import Link from 'next/link';
 
-async function getData({
-  params,
-}: {
-  params: {
-    countryCode: string;
-  };
-}) {
+async function getData(countryCode: string) {
   try {
     // TODO: fetch border countries using country code
     const res = await fetch(
-      `https://restcountries.com/v3.1/alpha/${params.countryCode}?fields=name,flags,population,region,subregion,capital,languages,currencies,tld,altSpellings,borders`
+      `https://restcountries.com/v3.1/alpha/${countryCode}?fields=name,flags,population,region,subregion,capital,languages,currencies,tld,altSpellings,borders`
     );
-    return res.json();
+    console.log(countryCode);
+    const data = await res.json();
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -27,11 +23,11 @@ export default async function CountryDetails({
     countryCode: string;
   };
 }) {
-  const data = await getData({ params });
+  const data = await getData(params.countryCode);
   const fetchedCountry = await data;
   console.log(fetchedCountry);
 
-  if (fetchedCountry)
+  if (fetchedCountry && fetchedCountry.name) {
     return (
       <section className={styles.container}>
         <Image src={fetchedCountry.flags?.svg} alt={fetchedCountry.flags.alt} width={300} height={200} />
@@ -51,7 +47,6 @@ export default async function CountryDetails({
         <p>
           <b>Capital:</b> {fetchedCountry.capital[0]}
         </p>
-
         <br />
         <p>
           <b>Top Level Domain:</b> {fetchedCountry.tld[0]}
@@ -89,4 +84,5 @@ export default async function CountryDetails({
         </div>
       </section>
     );
+  }
 }
