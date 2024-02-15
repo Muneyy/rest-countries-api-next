@@ -2,4 +2,17 @@
   b {
     font-weight: 600;
   }
+
+  .borderLink {
+    text-decoration: none;
+    color: var(--secondary);
+
+    button {
+        background-color: var(--primary-light);
+        border: 1px solid black;
+        color: var(--secondary);
+        cursor: pointer;
+    }
+  }
+
 }
