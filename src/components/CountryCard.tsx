@@ -20,7 +20,18 @@ export default function CountryCard({
   return (
     <section className={styles.container}>
       <div className={styles.imageContainer}>
-        <Image src={flags.svg} alt={flags.alt} layout="fill" objectFit="cover" />
+        <Image
+          src={flags.svg}
+          alt={flags.alt}
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+          className={styles.flagImage}
+        />
       </div>
       <section className={styles.details}>
         <h1>{name}</h1>
