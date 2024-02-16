@@ -1,3 +1,5 @@
+// parse and sort the necessary values from currencies
+// and languages objects from rest-countries api
 export default function renderKeyValuePairs(data: Record<string, { name: string } | string>, label: string) {
   const textInputs: string[] = [];
   const tempArr = Object.entries(data);

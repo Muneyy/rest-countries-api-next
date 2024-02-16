@@ -5,22 +5,7 @@ import BackButton from '@/components/BackButton';
 import { notFound } from 'next/navigation';
 import renderKeyValuePairs from '@/helperFunctions/renderKeyValuePairs';
 import commafy from '@/helperFunctions/commafy';
-
-async function getData(countryCode: string) {
-  try {
-    // TODO: fetch border countries using country code
-    const res = await fetch(
-      `https://restcountries.com/v3.1/alpha/${countryCode}?fields=name,flags,population,region,subregion,capital,languages,currencies,tld,altSpellings,borders`
-    );
-
-    if (!res.ok) return undefined;
-
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    return err;
-  }
-}
+import getDataForCountryDetails from '../fetchUtils/getDataForCountryDetails';
 
 export default async function CountryDetails({
   params,
@@ -29,13 +14,12 @@ export default async function CountryDetails({
     countryCode: string;
   };
 }) {
-  const data = await getData(params.countryCode);
+  const data = await getDataForCountryDetails(params.countryCode);
 
   if (!data) {
     return notFound();
   }
 
-  // const fetchedCountry = await data;
   const { flags, name, altSpellings, population, region, subregion, capital, tld, currencies, languages, borders } =
     await data;
 
@@ -43,9 +27,19 @@ export default async function CountryDetails({
     <section className={styles.container}>
       <div className={styles.leftSide}>
         <BackButton />
-        <div className={styles.flagImage}>
-          <Image src={flags.svg} alt={flags.alt} layout="fill" />
-        </div>
+        <Image
+          src={flags.svg}
+          alt={flags.alt}
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{
+            width: '100%',
+            height: 'auto',
+            boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px',
+          }}
+          className={styles.flagImage}
+        />
       </div>
       <div className={styles.rightSide}>
         <h1>{name.common}</h1>
@@ -82,13 +76,17 @@ export default async function CountryDetails({
           </p>
           <br />
           <div className={styles.bordersContainer}>
-            {borders.sort().map((border: string) => {
-              return (
-                <Link href={`/${border}`} key={border} aria-label={`Link to ${border}`} className={styles.borderLink}>
-                  <button type="button">{border}</button>
-                </Link>
-              );
-            })}
+            {borders.length > 0 ? (
+              borders.sort().map((border: string) => {
+                return (
+                  <Link href={`/${border}`} key={border} aria-label={`Link to ${border}`} className={styles.borderLink}>
+                    <button type="button">{border}</button>
+                  </Link>
+                );
+              })
+            ) : (
+              <p>No border countries.</p>
+            )}
           </div>
         </div>
       </div>

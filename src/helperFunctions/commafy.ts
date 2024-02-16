@@ -1,4 +1,6 @@
 // https://stackoverflow.com/questions/6784894/add-commas-or-spaces-to-group-every-three-digits
+// function to add commas every three digits in a number
+// for better readability
 export default function commafy(num: number) {
   const str = num.toString().split('.');
   if (str[0].length >= 5) {
