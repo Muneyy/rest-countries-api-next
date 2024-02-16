@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    padding: 50px 0px 55px 0px;
+    @media screen and (min-width: 650px) {
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 70px;
+        padding-left: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--secondary);
+    }
+}
