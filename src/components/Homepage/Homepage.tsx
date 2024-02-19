@@ -4,9 +4,8 @@ import { TCountry } from '@/app/types/countryTypes';
 import Link from 'next/link';
 import styles from './Homepage.module.scss';
 import { useEffect, useState } from 'react';
-import CountryCard from './CountryCard';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import CountryCard from '../CountryCard';
+import Searchbar from './Searchbar';
 
 export default function Homepage({ countryList }: { countryList: TCountry[] }) {
   const [sortedList, setSortedList] = useState<TCountry[]>([]);
@@ -24,10 +23,7 @@ export default function Homepage({ countryList }: { countryList: TCountry[] }) {
 
   return (
     <main className={styles.main}>
-      <div className={styles.searchContainer}>
-        <FontAwesomeIcon icon={faSearch} />
-        <input type="text" placeholder={'Search for a country...'} onChange={(e) => setSearch(e.target.value)} />
-      </div>
+      <Searchbar setSearch={setSearch} />
       <section className={styles.cardsContainer}>
         {sortedList.map((country: TCountry) => (
           <Link key={country.name.common} href={`/${country.cca3}`}>
