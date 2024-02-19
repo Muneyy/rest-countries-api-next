@@ -4,8 +4,7 @@ import Link from 'next/link';
 import getDataForHomepage from './fetchUtils/getDataForHomepage';
 import { TCountry } from '@/app/types/countryTypes';
 export default async function Home() {
-  const data = await getDataForHomepage();
-  const fetchedList = await data;
+  const fetchedList = await getDataForHomepage();
 
   const countryList = fetchedList.sort((a: TCountry, b: TCountry) => a.name.common.localeCompare(b.name.common));
 

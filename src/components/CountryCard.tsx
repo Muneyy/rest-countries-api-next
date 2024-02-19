@@ -1,3 +1,4 @@
+import commafy from '@/helperFunctions/commafy';
 import styles from './CountryCard.module.sass';
 import Image from 'next/image';
 
@@ -30,13 +31,14 @@ export default function CountryCard({
             width: '100%',
             height: 'auto',
           }}
+          objectFit="contain"
           className={styles.flagImage}
         />
       </div>
       <section className={styles.details}>
         <h1>{name}</h1>
         <p>
-          <b>Population: </b> {population}
+          <b>Population: </b> {commafy(population)}
         </p>
         <p>
           <b>Region: </b> {region}

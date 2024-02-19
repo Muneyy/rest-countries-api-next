@@ -7,7 +7,7 @@ export default async function getDataForHomepage() {
 
     const data = await res.json();
     return data;
-  } catch (err) {
+  } catch (err: unknown) {
     return err;
   }
 }
