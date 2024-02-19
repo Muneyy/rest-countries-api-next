@@ -5,6 +5,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Nunito Sans', sans-serif;
+  background-color: var(--primary-light);
 }
 * {
   box-sizing: border-box;
@@ -12,7 +13,8 @@ body {
 
 body {
   margin: auto;
-  max-width: 1440px
+  max-width: 1440px;
+  height: 100%;
 }
 
 button {
@@ -23,7 +25,7 @@ button {
 :root[data-theme='light'] {
   --primary: hsl(0, 0%, 100%);
   --primary-light: hsl(0, 0%, 98%);
-  --primary-very-light: hsl(0, 0%, 85%);
+  --primary-very-light: hsl(0, 0%, 98%);
   --secondary: hsl(200, 15%, 8%);
   --secondary-light: hsl(207, 26%, 17%);
   --secondary-very-light: hsl(209, 23%, 22%);

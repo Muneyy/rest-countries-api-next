@@ -1,0 +1,117 @@
+.container {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  padding-left: 28px;
+  padding-right: 28px;
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    @media screen and (min-width: 768px) {
+      font-size: 2rem;
+      font-weight: 800
+    }
+  }
+  b {
+    font-weight: 600;
+  }
+  p {
+    margin: 0;
+    font-size: 0.88rem;
+    @media screen and (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+  img {
+    align-self: center;
+  }
+  button {
+    background-color: var(--primary-very-light);
+    width: 95px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--secondary);
+    cursor: pointer;
+    &:hover {
+      filter: invert(0.2);
+    }
+  }
+}
+
+.flagImage {
+  box-shadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px';
+  margin-top: 50px;
+}
+
+.bordersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.borderLink {
+  text-decoration: none;
+  color: var(--secondary);
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 1200px) {
+    padding: 50px
+  }
+}
+
+.rightSide {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    padding-right: 100px;
+    padding-left: 20px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding-top: 100px;
+  }
+
+
+.detailsLeftSide,
+.detailsRightSide {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detailsDivider {
+  @media screen and (min-width: 1200px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.bordersDivider {
+  margin-top: 40px;
+  @media screen and (min-width: 1200px) {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 80px;
+  }
+}
+
+}
