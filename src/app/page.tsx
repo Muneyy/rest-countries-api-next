@@ -1,8 +1,8 @@
-import CountryCard from '@/components/CountryCard';
 import styles from './page.module.scss';
-import Link from 'next/link';
 import getDataForHomepage from './fetchUtils/getDataForHomepage';
 import { TCountry } from '@/app/types/countryTypes';
+import Homepage from '@/components/Homepage';
+
 export default async function Home() {
   const fetchedList = await getDataForHomepage();
 
@@ -11,17 +11,7 @@ export default async function Home() {
   if (countryList.length > 0) {
     return (
       <main className={styles.main}>
-        {countryList.map((country: TCountry) => (
-          <Link key={country.name.common} href={`/${country.cca3}`}>
-            <CountryCard
-              flags={country.flags}
-              name={country.name.common}
-              population={country.population}
-              region={country.region}
-              capital={country.capital}
-            />
-          </Link>
-        ))}
+        <Homepage countryList={countryList} />
       </main>
     );
   }
