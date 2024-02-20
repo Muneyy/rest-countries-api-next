@@ -6,10 +6,12 @@ import styles from './Homepage.module.scss';
 import { useEffect, useState } from 'react';
 import CountryCard from '../CountryCard';
 import Searchbar from './Searchbar';
+import FilterSelect from './FilterSelect';
 
 export default function Homepage({ countryList }: { countryList: TCountry[] }) {
   const [sortedList, setSortedList] = useState<TCountry[]>([]);
   const [search, setSearch] = useState<string>('');
+  const [regionFilter, setRegionFilter] = useState<string>('');
 
   useEffect(() => {
     setSortedList(countryList);
@@ -21,9 +23,18 @@ export default function Homepage({ countryList }: { countryList: TCountry[] }) {
     );
   }, [search]);
 
+  useEffect(() => {
+    setSortedList(
+      countryList.filter((country: TCountry) => country.region.toLowerCase().includes(regionFilter.toLowerCase()))
+    );
+  }, [regionFilter]);
+
   return (
     <main className={styles.main}>
-      <Searchbar setSearch={setSearch} />
+      <div className={styles.utilsContainer}>
+        <Searchbar setSearch={setSearch} />
+        <FilterSelect setRegionFilter={setRegionFilter} />
+      </div>
       <section className={styles.cardsContainer}>
         {sortedList.map((country: TCountry) => (
           <Link key={country.name.common} href={`/${country.cca3}`}>

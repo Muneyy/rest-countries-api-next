@@ -1,12 +1,19 @@
 .main {
-    padding: 45px 17px 0px 17px;
+    padding: 22px 17px 0px 17px;
     display: flex;
     flex-direction: column;
     height: 30px;
     @media screen and (min-width: 1200px) {
         padding-left: 80px;
         padding-right: 80px;
+        padding-top: 45px;
     }
+}
+
+.utilsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .cardsContainer {
