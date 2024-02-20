@@ -1,0 +1,30 @@
+.main {
+    padding: 45px 17px 0px 17px;
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    @media screen and (min-width: 1200px) {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    padding: 50px 0px 55px 0px;
+    @media screen and (min-width: 650px) {
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 70px;
+        padding-left: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--secondary);
+    }
+}
