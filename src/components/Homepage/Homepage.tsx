@@ -18,6 +18,10 @@ export default function Homepage({ countryList }: { countryList: TCountry[] }) {
   }, []);
 
   useEffect(() => {
+    if (regionFilter !== '') {
+      setRegionFilter('');
+    }
+
     setSortedList(
       countryList.filter((country: TCountry) => country.name.common.toLowerCase().includes(search.toLowerCase()))
     );
@@ -33,7 +37,7 @@ export default function Homepage({ countryList }: { countryList: TCountry[] }) {
     <main className={styles.main}>
       <div className={styles.utilsContainer}>
         <Searchbar setSearch={setSearch} />
-        <FilterSelect setRegionFilter={setRegionFilter} />
+        <FilterSelect regionFilter={regionFilter} setRegionFilter={setRegionFilter} />
       </div>
       <section className={styles.cardsContainer}>
         {sortedList.map((country: TCountry) => (
