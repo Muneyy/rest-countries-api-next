@@ -19,3 +19,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Check out the app deployed using Vercel: https://rest-countries-api-next-muneyy.vercel.app/
 
+## How to contribute
+
+Feel free to fork this repository and add your contributions.
+
