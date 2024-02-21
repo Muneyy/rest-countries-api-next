@@ -37,7 +37,7 @@ export default function Homepage({ countryList }: { countryList: TCountry[] }) {
     <main className={styles.main}>
       <div className={styles.utilsContainer}>
         <Searchbar setSearch={setSearch} />
-        <FilterSelect regionFilter={regionFilter} setRegionFilter={setRegionFilter} />
+        <FilterSelect setRegionFilter={setRegionFilter} />
       </div>
       <section className={styles.cardsContainer}>
         {sortedList.map((country: TCountry) => (
