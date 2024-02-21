@@ -10,6 +10,22 @@
     transition: transform 0.2s ease-in-out;
 }
 
+.symbolsContainer {
+    display: flex;
+    align-items: center;
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding-right: 0;
+        &:hover {
+            svg {
+                scale: 1.2;
+            }
+        }
+    }
+}
+
 .selectButton,
 .optionsList {
     background-color: var(--primary-very-light);
