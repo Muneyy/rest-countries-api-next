@@ -8,7 +8,7 @@ import CountryCard from '../CountryCard';
 import Searchbar from './Searchbar';
 import FilterSelect from './FilterSelect';
 
-export default function Homepage({ countryList }: { countryList: TCountry[] }) {
+const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
   const [sortedList, setSortedList] = useState<TCountry[]>([]);
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [regionFilter, setRegionFilter] = useState<string>('');
@@ -59,4 +59,6 @@ export default function Homepage({ countryList }: { countryList: TCountry[] }) {
       </section>
     </main>
   );
-}
+};
+
+export default Homepage;

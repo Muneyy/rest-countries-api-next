@@ -3,24 +3,25 @@ import styles from './FilterSelect.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faClose } from '@fortawesome/free-solid-svg-icons';
 
-export default function FilterSelect({ setRegionFilter }: { setRegionFilter: React.Dispatch<SetStateAction<string>> }) {
-  const optionsList = ['Africa', 'Americas', 'Antarctic', 'Asia', 'Europe', 'Oceania'];
+const OPTIONS_LIST = ['Africa', 'Americas', 'Antarctic', 'Asia', 'Europe', 'Oceania'];
+const DEFAULT_TEXT = 'Filter by Region';
 
+const FilterSelect = ({ setRegionFilter }: { setRegionFilter: React.Dispatch<SetStateAction<string>> }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const [selectedFilter, setSelectedFilter] = useState<string>('Filter by Region');
+  const [selectedFilter, setSelectedFilter] = useState<string>(DEFAULT_TEXT);
 
-  function handleRegionButtonClick(item: string) {
+  const handleRegionButtonClick = (item: string) => {
     setRegionFilter(item);
     setSelectedFilter(item);
     setShowMenu(false);
-  }
+  };
 
-  function handleCloseClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  const handleCloseClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     setRegionFilter('');
-    setSelectedFilter('Filter by Region');
+    setSelectedFilter(DEFAULT_TEXT);
     setShowMenu(false);
-  }
+  };
 
   return (
     <div className={styles.filterContainer}>
@@ -36,7 +37,7 @@ export default function FilterSelect({ setRegionFilter }: { setRegionFilter: Rea
             icon={faChevronUp}
             className={[styles.rotateTransition, showMenu ? styles.rotateIcon : ''].join(' ')}
           />
-          {selectedFilter !== 'Filter by Region' && (
+          {selectedFilter !== DEFAULT_TEXT && (
             <button type="button" aria-label="reset region filter" onClick={(e) => handleCloseClick(e)}>
               <FontAwesomeIcon icon={faClose} />
             </button>
@@ -51,15 +52,15 @@ export default function FilterSelect({ setRegionFilter }: { setRegionFilter: Rea
           aria-expanded={showMenu}
           aria-label="list of options for the region filter"
         >
-          {optionsList.map((item) => {
-            return (
-              <button type="button" key={item} onClick={() => handleRegionButtonClick(item)}>
-                {item}
-              </button>
-            );
-          })}
+          {OPTIONS_LIST.map((item) => (
+            <button type="button" key={item} onClick={() => handleRegionButtonClick(item)}>
+              {item}
+            </button>
+          ))}
         </div>
       )}
     </div>
   );
-}
+};
+
+export default FilterSelect;
