@@ -3,7 +3,7 @@ import './globals.scss';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Header from '@/components/Header';
-config.autoAddCss = false;
+config.autoAddCss = true;
 
 export const metadata: Metadata = {
   title: 'Rest Countries API',
