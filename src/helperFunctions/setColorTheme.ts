@@ -1,4 +1,4 @@
-export default function setInitialTheme(window: Window) {
+export default function setColorTheme(window: Window) {
   const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const hasNoPreference = !prefersLight && !prefersDark;
