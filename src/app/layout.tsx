@@ -4,6 +4,8 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Header from '@/components/Header';
 import ThemeSetter from '@/components/ThemeSetter';
+import { Suspense } from 'react';
+import Loading from './loading';
 config.autoAddCss = true;
 
 export const metadata: Metadata = {
@@ -21,7 +23,7 @@ export default function RootLayout({
       <body>
         <ThemeSetter>
           <Header />
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </ThemeSetter>
       </body>
     </html>
