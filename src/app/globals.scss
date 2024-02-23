@@ -4,12 +4,10 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Nunito Sans', sans-serif;
   background-color: var(--primary-light);
 }
 * {
   box-sizing: border-box;
-  font-family: 'Nunito Sans', sans-serif;
 }
 
 body {
@@ -18,8 +16,9 @@ body {
   height: 100%;
 }
 
-button {
-  font-family: 'Nunito Sans', sans-serif;
+button,
+input {
+  font-family: inherit;
 }
 
 // light mode

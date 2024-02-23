@@ -7,13 +7,18 @@ import renderKeyValuePairs from '@/helperFunctions/renderKeyValuePairs';
 import commafy from '@/helperFunctions/commafy';
 import getDataForCountryDetails from '../fetchUtils/getDataForCountryDetails';
 
-export default async function CountryDetails({
-  params,
-}: {
-  params: {
-    countryCode: string;
+type CountryParams = {
+  countryCode: string;
+};
+
+export async function generateMetadata({ params }: { params: CountryParams }) {
+  return {
+    title: `Country Details: ${params.countryCode}`,
+    description: `Details for the country with the code ${params.countryCode} from the Rest Countries API.`,
   };
-}) {
+}
+
+export default async function CountryDetails({ params }: { params: CountryParams }) {
   const data = await getDataForCountryDetails(params.countryCode);
 
   if (!data) {

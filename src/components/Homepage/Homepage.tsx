@@ -7,14 +7,17 @@ import { useEffect, useState } from 'react';
 import CountryCard from '../CountryCard';
 import Searchbar from './Searchbar';
 import FilterSelect from './FilterSelect';
+import Spinner from '../Spinner';
 
 const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
   const [sortedList, setSortedList] = useState<TCountry[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [regionFilter, setRegionFilter] = useState<string>('');
 
   useEffect(() => {
     setSortedList(countryList);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -28,6 +31,19 @@ const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
   }, [searchFilter, regionFilter]);
 
   const renderFilteredCountries = () => {
+    if (isLoading) {
+      return <Spinner />;
+    }
+
+    if (sortedList.length === 0) {
+      return (
+        <span>
+          No countries matching &apos;{searchFilter}&apos; was found in the{' '}
+          {regionFilter === '' ? ' world.' : `${regionFilter} region.`}
+        </span>
+      );
+    }
+
     return sortedList.map((country: TCountry) => (
       <Link key={country.name.common} href={`/${country.cca3}`}>
         <CountryCard
@@ -47,16 +63,7 @@ const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
         <Searchbar setSearch={setSearchFilter} />
         <FilterSelect setRegionFilter={setRegionFilter} />
       </section>
-      <section className={styles.cardsContainer}>
-        {sortedList.length > 0 ? (
-          renderFilteredCountries()
-        ) : (
-          <span>
-            No countries matching &apos;{searchFilter}&apos; was found in the{' '}
-            {regionFilter === '' ? ' world.' : `${regionFilter} region.`}
-          </span>
-        )}
-      </section>
+      <section className={styles.cardsContainer}>{renderFilteredCountries()}</section>
     </main>
   );
 };
