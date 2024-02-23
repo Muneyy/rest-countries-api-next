@@ -6,10 +6,12 @@ import styles from './Homepage.module.scss';
 import { useEffect, useState } from 'react';
 import CountryCard from '../CountryCard';
 import Searchbar from './Searchbar';
+import FilterSelect from './FilterSelect';
 
-export default function Homepage({ countryList }: { countryList: TCountry[] }) {
+const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
   const [sortedList, setSortedList] = useState<TCountry[]>([]);
-  const [search, setSearch] = useState<string>('');
+  const [searchFilter, setSearchFilter] = useState<string>('');
+  const [regionFilter, setRegionFilter] = useState<string>('');
 
   useEffect(() => {
     setSortedList(countryList);
@@ -17,26 +19,46 @@ export default function Homepage({ countryList }: { countryList: TCountry[] }) {
 
   useEffect(() => {
     setSortedList(
-      countryList.filter((country: TCountry) => country.name.common.toLowerCase().includes(search.toLowerCase()))
+      countryList.filter(
+        (country: TCountry) =>
+          country.name.common.toLowerCase().includes(searchFilter.toLowerCase()) &&
+          country.region.toLowerCase().includes(regionFilter.toLowerCase())
+      )
     );
-  }, [search]);
+  }, [searchFilter, regionFilter]);
+
+  const renderFilteredCountries = () => {
+    return sortedList.map((country: TCountry) => (
+      <Link key={country.name.common} href={`/${country.cca3}`}>
+        <CountryCard
+          flags={country.flags}
+          name={country.name.common}
+          population={country.population}
+          region={country.region}
+          capital={country.capital}
+        />
+      </Link>
+    ));
+  };
 
   return (
     <main className={styles.main}>
-      <Searchbar setSearch={setSearch} />
+      <section className={styles.utilsContainer}>
+        <Searchbar setSearch={setSearchFilter} />
+        <FilterSelect setRegionFilter={setRegionFilter} />
+      </section>
       <section className={styles.cardsContainer}>
-        {sortedList.map((country: TCountry) => (
-          <Link key={country.name.common} href={`/${country.cca3}`}>
-            <CountryCard
-              flags={country.flags}
-              name={country.name.common}
-              population={country.population}
-              region={country.region}
-              capital={country.capital}
-            />
-          </Link>
-        ))}
+        {sortedList.length > 0 ? (
+          renderFilteredCountries()
+        ) : (
+          <span>
+            No countries matching &apos;{searchFilter}&apos; was found in the{' '}
+            {regionFilter === '' ? ' world.' : `${regionFilter} region.`}
+          </span>
+        )}
       </section>
     </main>
   );
-}
+};
+
+export default Homepage;

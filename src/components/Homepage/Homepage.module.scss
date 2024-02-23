@@ -1,11 +1,27 @@
 .main {
-    padding: 45px 17px 0px 17px;
+    padding: 22px 17px 0px 17px;
     display: flex;
     flex-direction: column;
     height: 30px;
     @media screen and (min-width: 1200px) {
         padding-left: 80px;
         padding-right: 80px;
+        padding-top: 45px;
+    }
+}
+
+.utilsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media screen and (min-width: 768px) and (max-width: 1199px){
+        margin: 0 65px;
+    }
+    @media screen and (min-width: 1200px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 5px;
     }
 }
 
@@ -26,5 +42,10 @@
     a {
         text-decoration: none;
         color: var(--secondary);
+    }
+
+    span {
+        font-weight: 600;
+        font-size: 1.1rem;
     }
 }
