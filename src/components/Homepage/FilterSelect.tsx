@@ -83,7 +83,7 @@ const FilterSelect = ({ setRegionFilter }: { setRegionFilter: React.Dispatch<Set
   return (
     <div className={styles.filterContainer}>
       <button
-        type="submit"
+        type="button"
         className={styles.selectButton}
         onClick={() => setShowMenu((showMenu) => !showMenu)}
         aria-label="open region filter options (contained in a div)"
