@@ -10,7 +10,15 @@ export default function Header() {
   const [currentTheme, setCurrentTheme] = useState<string | null>();
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (localStorage.getItem('theme') === null) {
+      if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        setCurrentTheme('light');
+      } else {
+        setCurrentTheme('dark');
+      }
+    }
+
+    if (localStorage.getItem('theme') === 'dark') {
       setCurrentTheme('dark');
     } else {
       setCurrentTheme('light');
@@ -22,6 +30,7 @@ export default function Header() {
     const newTheme = currentColorTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     setCurrentTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   }
 
   const renderLogo = () => {
