@@ -7,18 +7,22 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Header() {
+  const [currentTheme, setCurrentTheme] = useState<string | null>();
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setCurrentTheme('dark');
+    } else {
+      setCurrentTheme('light');
+    }
+  }, []);
+
   function toggleThemeClick() {
     const currentColorTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentColorTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     setCurrentTheme(newTheme);
   }
-
-  const [currentTheme, setCurrentTheme] = useState<string | null>();
-
-  useEffect(() => {
-    setCurrentTheme(document.documentElement.getAttribute('data-theme'));
-  }, []);
 
   const renderLogo = () => {
     if (currentTheme === 'light') {
