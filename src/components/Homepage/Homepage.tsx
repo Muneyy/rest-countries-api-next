@@ -14,10 +14,12 @@ const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [regionFilter, setRegionFilter] = useState<string>('');
+  const [cardsToRender, setCardsToRender] = useState<number>(12);
 
   useEffect(() => {
     setSortedList(countryList);
     setIsLoading(false);
+    setCardsToRender(12);
   }, []);
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
           country.region.toLowerCase().includes(regionFilter.toLowerCase())
       )
     );
+    setCardsToRender(12);
   }, [searchFilter, regionFilter]);
 
   const renderFilteredCountries = () => {
@@ -44,7 +47,9 @@ const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
       );
     }
 
-    return sortedList.map((country: TCountry) => (
+    const slicedList = sortedList.slice(0, cardsToRender);
+
+    return slicedList.map((country: TCountry) => (
       <Link key={country.name.common} href={`/${country.cca3}`}>
         <CountryCard
           flags={country.flags}
@@ -56,6 +61,24 @@ const Homepage = ({ countryList }: { countryList: TCountry[] }) => {
       </Link>
     ));
   };
+
+  const handleLoadMore = () => {
+    setCardsToRender((prev) => prev + 12);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      if (scrollTop + clientHeight >= scrollHeight - 800) {
+        handleLoadMore();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <main className={styles.main}>

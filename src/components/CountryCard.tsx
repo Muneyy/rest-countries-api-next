@@ -31,7 +31,6 @@ export default function CountryCard({
             width: '100%',
             height: 'auto',
           }}
-          objectFit="contain"
           className={styles.flagImage}
         />
       </div>

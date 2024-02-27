@@ -7,7 +7,7 @@ export default function Searchbar({ setSearch }: { setSearch: React.Dispatch<Set
   return (
     <div className={styles.searchContainer}>
       <FontAwesomeIcon icon={faSearch} />
-      <input type="text" placeholder={'Search for a country...'} onChange={(e) => setSearch(e.target.value)} />
+      <input type="search" placeholder={'Search for a country...'} onChange={(e) => setSearch(e.target.value)} />
     </div>
   );
 }

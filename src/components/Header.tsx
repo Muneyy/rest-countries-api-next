@@ -2,15 +2,54 @@
 
 import styles from './Header.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
+  const [currentTheme, setCurrentTheme] = useState<string | null>();
+
+  useEffect(() => {
+    if (localStorage.getItem('theme') === null) {
+      if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        setCurrentTheme('light');
+      } else {
+        setCurrentTheme('dark');
+      }
+    }
+
+    if (localStorage.getItem('theme') === 'dark') {
+      setCurrentTheme('dark');
+    } else {
+      setCurrentTheme('light');
+    }
+  }, []);
+
   function toggleThemeClick() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const currentColorTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentColorTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
+    setCurrentTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   }
+
+  const renderLogo = () => {
+    if (currentTheme === 'light') {
+      return (
+        <>
+          <FontAwesomeIcon icon={faSun} />
+          <p>Light mode</p>
+        </>
+      );
+    } else if (currentTheme === 'dark') {
+      return (
+        <>
+          <FontAwesomeIcon icon={faMoon} />
+          <p>Dark mode</p>
+        </>
+      );
+    }
+  };
 
   return (
     <section className={styles.headerContainer}>
@@ -18,8 +57,7 @@ export default function Header() {
         Where in the world?
       </Link>
       <button type="button" aria-label="Toggle dark mode" className={styles.themeButton} onClick={toggleThemeClick}>
-        <FontAwesomeIcon icon={faMoon} />
-        <p>Dark Mode</p>
+        {renderLogo()}
       </button>
     </section>
   );
